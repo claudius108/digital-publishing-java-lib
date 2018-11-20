@@ -5,7 +5,7 @@ import java.util.Map;
 
 public enum Formats {
 
-	HTML("html", "HTML"), XSL_FO("xsl-fo", "XSLFO");
+	HTML("html", "Html"), XSL_FO("xsl-fo", "XslFo");
 
 	private static final Map<String, Formats> FormatsMAP = new HashMap<String, Formats>();
 	static {

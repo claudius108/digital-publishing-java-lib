@@ -1,11 +1,8 @@
 package ro.kuberam.libs.java.digitalPublishing.Transform;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 
-public class HTML_TO_XSLFO_Test {
+public class HtmlToXslFoTest {
 
 	@Test
 	public void test() {

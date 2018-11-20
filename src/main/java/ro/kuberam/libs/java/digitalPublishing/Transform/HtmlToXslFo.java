@@ -7,7 +7,7 @@ import java.io.InputStream;
 import be.re.css.CSSToXSLFO;
 import be.re.css.CSSToXSLFOException;
 
-public class HTML_TO_XSLFO {
+public class HtmlToXslFo {
 
 	public String run(InputStream inputNodeStream) {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
