@@ -13,27 +13,16 @@ public class Operation {
 
 	public static String run(InputStream data, String inputFormat, String outputFormat) {
 		String result = null;
-		String transformation = Formats.getJavaCode(inputFormat) + "To" + Formats.getJavaCode(outputFormat);
 
 		try {
+			String transformation = Formats.getTransformationFormula(inputFormat, outputFormat);
 			Object transformationClass = Class.forName(packageName + transformation).newInstance();
 			Method transformationClassMethod = transformationClass.getClass().getMethod("run", InputStream.class);
-			
+
 			String transformationResult = (String) transformationClassMethod.invoke(transformationClass, data);
 			LOG.debug("transformationResult = {}", () -> transformationResult);
 
 			result = transformationResult;
-
-			// case "HTML_TO_XSLFO":
-			//
-			//
-			// result = (String) transformationClass.getDeclaredMethod("run",
-			// InputStream.class)
-			// .invoke(data);
-			// default:
-			// throw new
-			// DigitalPublishingException(DigitalPublishingError.TRANSFORMATION_FORMULA);
-			// }
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | ClassNotFoundException | InstantiationException e) {
 			e.printStackTrace();
