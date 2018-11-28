@@ -58,11 +58,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>ldapjdk</groupId>
-			<artifactId>ldapjdk</artifactId>
-			<scope>system</scope>
-			<version>1.0</version>
-			<systemPath>${basedir}/lib/css2xslfo1_6_2.jar</systemPath>
+			<groupId>be.re</groupId>
+			<artifactId>css2xslfo</artifactId>
+			<version>1.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -121,42 +119,69 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-						<manifestEntries>
-							<Build-Tag>${build-tag}</Build-Tag>
-							<Git-Commit>${build-commit}</Git-Commit>
-							<Git-Commit-Abbrev>${build-commit-abbrev}</Git-Commit-Abbrev>
-							<Build-Version>${build-version}</Build-Version>
-							<Build-Timestamp>${build-tstamp}</Build-Timestamp>
-							<Source-Repository>${project.scm.connection}</Source-Repository>
-							<Description>${project.description}</Description>
-							<Implementation-URL>${project.url}</Implementation-URL>
-						</manifestEntries>
-					</archive>
-					
-				</configuration>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
-						<id>make-assembly</id>
 						<phase>package</phase>
 						<goals>
-							<goal>single</goal>
+							<goal>shade</goal>
 						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>be.re:css2xslfo</include>
+								</includes>
+								<excludes>
+									<exclude>org.apache.logging.log4j:log4j-api</exclude>
+									<exclude>junit:junit</exclude>
+								</excludes>
+							</artifactSet>
+							<dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
+
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-assembly-plugin</artifactId> -->
+			<!-- <version>3.1.0</version> -->
+			<!-- <configuration> -->
+			<!-- <descriptorRefs> -->
+			<!-- <descriptorRef>jar-with-dependencies</descriptorRef> -->
+			<!-- </descriptorRefs> -->
+			<!-- <archive> -->
+			<!-- <manifest> -->
+			<!-- <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> -->
+			<!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> -->
+			<!-- </manifest> -->
+			<!-- <manifestEntries> -->
+			<!-- <Build-Tag>${build-tag}</Build-Tag> -->
+			<!-- <Git-Commit>${build-commit}</Git-Commit> -->
+			<!-- <Git-Commit-Abbrev>${build-commit-abbrev}</Git-Commit-Abbrev> -->
+			<!-- <Build-Version>${build-version}</Build-Version> -->
+			<!-- <Build-Timestamp>${build-tstamp}</Build-Timestamp> -->
+			<!-- <Source-Repository>${project.scm.connection}</Source-Repository> -->
+			<!-- <Description>${project.description}</Description> -->
+			<!-- <Implementation-URL>${project.url}</Implementation-URL> -->
+			<!-- </manifestEntries> -->
+			<!-- </archive> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>make-assembly</id> -->
+			<!-- <phase>package</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>single</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 
 
 			<!-- <plugin> -->
