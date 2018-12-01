@@ -1,4 +1,4 @@
-package ro.kuberam.libs.java.digitalPublishing.Transform;
+package ro.kuberam.libs.java.digitalPublishing.transform;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
