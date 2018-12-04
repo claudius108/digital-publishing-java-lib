@@ -1,23 +1,23 @@
 package ro.kuberam.libs.java.digitalPublishing.transform;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import be.re.css.CSSToXSLFO;
 import be.re.css.CSSToXSLFOException;
 
 public class HtmlToXslFo {
 
-	public String run(InputStream inputNodeStream) {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+	public byte[] run(byte[] inputDocument) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		try {
-			CSSToXSLFO.convert(inputNodeStream, out);
+			CSSToXSLFO.convert(new ByteArrayInputStream(inputDocument), baos);
 		} catch (IOException | CSSToXSLFOException e) {
 			e.printStackTrace();
 		}
 
-		return out.toString();
+		return baos.toByteArray();
 	}
 }

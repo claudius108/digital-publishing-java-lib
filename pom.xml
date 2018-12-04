@@ -6,7 +6,7 @@
 
 	<groupId>ro.kuberam.libs.java</groupId>
 	<artifactId>digital-publishing</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<name>EXPath Digital Publishing Module</name>
 	<description>Java Library providing an EXPath Digital Publishing Module</description>
 	<url>http://kuberam.ro/specs/expath/digital-publishing/digital-publishing.html</url>
