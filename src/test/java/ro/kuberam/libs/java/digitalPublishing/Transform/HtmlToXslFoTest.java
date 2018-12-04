@@ -8,12 +8,11 @@ public class HtmlToXslFoTest {
 
 	@Test
 	public void test() {
-		String inputFormat = "html";
-		String outputFormat = "xsl-fo";
-		
+		String transformationFormula = "html-to-xsl-fo";
+
 		String result = null;
-		result = Operation.run(this.getClass().getResourceAsStream("invoice.xhtml"), inputFormat, outputFormat);
-		
+		result = Operation.run(this.getClass().getResourceAsStream("invoice.xhtml"), transformationFormula);
+
 		System.out.println(result);
 	}
 

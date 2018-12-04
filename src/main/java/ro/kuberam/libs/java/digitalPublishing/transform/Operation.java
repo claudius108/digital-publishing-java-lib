@@ -11,12 +11,12 @@ public class Operation {
 	private static Logger LOG = LogManager.getLogger(Operation.class);
 	private static String packageName = Operation.class.getPackage().getName() + ".";
 
-	public static String run(InputStream data, String inputFormat, String outputFormat) {
+	public static String run(InputStream data, String transformationFormula) {
 		String result = null;
 
 		try {
-			String transformation = Formats.getTransformationFormula(inputFormat, outputFormat);
-			Object transformationClass = Class.forName(packageName + transformation).newInstance();
+			String javaTransformationFormula = Formats.convertToJavaTransformationFormula(transformationFormula);
+			Object transformationClass = Class.forName(packageName + javaTransformationFormula).newInstance();
 			Method transformationClassMethod = transformationClass.getClass().getMethod("run", InputStream.class);
 
 			String transformationResult = (String) transformationClassMethod.invoke(transformationClass, data);
@@ -29,6 +29,6 @@ public class Operation {
 		}
 
 		return result;
-	}
+	}	
 
 }

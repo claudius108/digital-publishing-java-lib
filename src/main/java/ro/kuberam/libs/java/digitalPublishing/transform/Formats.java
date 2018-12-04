@@ -37,10 +37,15 @@ public enum Formats {
 		return FormatsMAP.get(code).getJavaCode();
 	}
 
-	public static String getTransformationFormula(String inputFormat, String outputFormat) {
-		String transformationFormula = null;
+	public static String convertToJavaTransformationFormula(String transformationFormula) {
+		String javaTransformationFormula = null;
+		
+		String[] tokenizedTransformationFormula = transformationFormula.split("-to-");
+		String inputFormat = tokenizedTransformationFormula[0];
+		String outputFormat = tokenizedTransformationFormula[1];
+		
 		try {
-			transformationFormula = Formats.getJavaCode(inputFormat) + "To" + Formats.getJavaCode(outputFormat);
+			javaTransformationFormula = Formats.getJavaCode(inputFormat) + "To" + Formats.getJavaCode(outputFormat);
 		} catch (Exception e) {
 			try {
 				throw new DigitalPublishingException(DigitalPublishingError.TRANSFORMATION_FORMULA);
@@ -49,6 +54,6 @@ public enum Formats {
 			}
 		}
 
-		return transformationFormula;
+		return javaTransformationFormula;
 	}
 }
